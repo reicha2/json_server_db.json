@@ -1,24 +1,19 @@
 {
   "products": [
     {
-      "id": "a668",
-      "price": "6",
+      "id": "35c8",
+      "price": "8888888",
+      "description": "gyuyguyg"
+    },
+    {
+      "id": "4256",
+      "price": "9999999999999999999",
+      "description": "zzzzzzzzzzzzzzzzzz"
+    },
+    {
+      "id": "b94c",
+      "price": "4",
       "description": "milk"
-    },
-    {
-      "id": "2f1d",
-      "price": "4.60",
-      "description": "Bread"
-    },
-    {
-      "price": "9",
-      "description": "coffee",
-      "id": "a72f"
-    },
-    {
-      "id": "9846",
-      "price": "8",
-      "description": "Cream 32%"
     }
   ]
 }

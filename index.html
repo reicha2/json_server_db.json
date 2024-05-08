@@ -59,24 +59,42 @@
                 </div>`).join("")
         }
         const addData = async () => {
-            await axios.post(SERVER, {
-                price: cPrice.value,
-                description: cDescription.value,
-            }).then(response => console.log(response)) //create
-        }
+    await axios.post(SERVER, {
+        price: cPrice.value,
+        description: cDescription.value,
+    }).then(response => {
+        console.log(response); // Log the response
+        // After adding data, reload the data from the server
+        loadData();
+    }).catch(error => {
+        console.error(error); // Log any errors
+    });
+}
 
-        const delData = (id) => {
-            console.log(id);
-            axios.delete(SERVER + id).then(r => console.log(r)) //delete
-        }
+const delData = (id) => {
+    console.log(id);
+    axios.delete(SERVER + id).then(r => {
+        console.log(r); // Log the response
+        // After deleting data, reload the data from the server
+        loadData();
+    }).catch(error => {
+        console.error(error); // Log any errors
+    });
+}
 
-        const upData = (id) => {
-            axios.put(SERVER + id, {
-                price: cPrice.value,
-                description: cDescription.value,
-                client: cClient.value,
-            }).then(response => console.log(response)) //update
-        }
+const upData = (id) => {
+    axios.put(SERVER + id, {
+        price: cPrice.value,
+        description: cDescription.value,
+        client: cClient.value,
+    }).then(response => {
+        console.log(response); // Log the response
+        // After updating data, reload the data from the server
+        loadData();
+    }).catch(error => {
+        console.error(error); // Log any errors
+    });
+}
 
         loadData()
 
