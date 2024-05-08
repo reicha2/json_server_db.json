@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .product {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .product-info {
+            margin-bottom: 10px;
+        }
+
+        .product-actions button {
+            margin-right: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <!-- <button onclick="loadData()">Load Data</button> -->
+    <br>
+    <!-- <button onclick="delData()">Delete Data</button> -->
+    <!-- <button onclick="upData()">Update Data</button> -->
+    Product Name: <input id="cDescription">
+    Price: <input id="cPrice">
+    <div id="cClient"></div>
+    <br>
+    <button onclick="addData()">Add Data</button>
+    <hr>
+    Products
+    <div id="displayProducts"></div>
+    <script>
+        const SERVER = "http://localhost:3000/products/"
+        let products = []
+
+        const loadData = async () => {
+            await axios.get(SERVER).then(res => products = res.data) //read
+            buildDisplay()
+        }
+
+        const buildDisplay = () => {
+            displayProducts.innerHTML = products.map(product => `<div class="product">
+                <div class="product-info">
+                    <strong>Product Name:</strong> ${product.description}<br>
+                    <strong>Price:</strong> ${product.price}<br>
+                    <strong>Client:</strong> ${product.id}
+                </div>
+                <div class="product-actions">
+                    <button onclick="delData('${product.id}')" > Delete</button>
+                    <button onclick="upData('${product.id}')" > Update</button>
+                </div>
+                </div>`).join("")
+        }
+        const addData = async () => {
+            await axios.post(SERVER, {
+                price: cPrice.value,
+                description: cDescription.value,
+            }).then(response => console.log(response)) //create
+        }
+
+        const delData = (id) => {
+            console.log(id);
+            axios.delete(SERVER + id).then(r => console.log(r)) //delete
+        }
+
+        const upData = (id) => {
+            axios.put(SERVER + id, {
+                price: cPrice.value,
+                description: cDescription.value,
+                client: cClient.value,
+            }).then(response => console.log(response)) //update
+        }
+
+        loadData()
+
+    </script>
+
+</body>
+
+</html>
